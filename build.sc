@@ -1,5 +1,21 @@
 import mill._, scalalib._
 
-object HelloWorld extends ScalaModule {
-  def scalaVersion = "2.13.10"
+val scala2: String = "2.13.10"
+val scala3: String = "3.2.2"
+
+object util extends Cross[UtilModule](scala2, scala3)
+class UtilModule(val crossScalaVersion: String) extends CrossScalaModule {}
+
+object akkahttp extends Cross[AkkaHTTPModule](scala2, scala3)
+class AkkaHTTPModule(val crossScalaVersion: String) extends CrossScalaModule {
+  def moduleDeps = Seq(util(crossScalaVersion))
+
+  val AkkaVersion = "2.7.0"
+  val AkkaHttpVersion = "10.5.0"
+
+  def ivyDeps = Agg(
+    ivy"com.typesafe.akka::akka-actor-typed:$AkkaVersion",
+    ivy"com.typesafe.akka::akka-stream:$AkkaVersion",
+    ivy"com.typesafe.akka::akka-http:$AkkaHttpVersion"
+  )
 }
