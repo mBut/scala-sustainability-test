@@ -19,3 +19,14 @@ class AkkaHTTPModule(val crossScalaVersion: String) extends CrossScalaModule {
     ivy"com.typesafe.akka::akka-http:$AkkaHttpVersion"
   )
 }
+
+object ziohttp extends Cross[ZioHttpModule](scala2, scala3)
+class ZioHttpModule(val crossScalaVersion: String) extends CrossScalaModule {
+  def moduleDeps = Seq(util(crossScalaVersion))
+
+  val ZioHttpVersion = "0.0.4"
+
+  def ivyDeps = Agg(
+    ivy"dev.zio::zio-http:$ZioHttpVersion",
+  )
+}
