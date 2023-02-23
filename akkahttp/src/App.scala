@@ -19,8 +19,6 @@ object App {
     implicit val system = ActorSystem(Behaviors.empty, "test-system")
     implicit val executionContext = system.executionContext
 
-    val workLoadFile = new File(extractedArgs.workloadFilename)
-
     val route = concat(
       path("health") {
           get {
@@ -29,7 +27,7 @@ object App {
       },
       path("sustainability-test") {
         get {
-          getFromFile(workLoadFile, ContentTypes.`application/json`)
+          getFromFile(new File(extractedArgs.workloadFilename), ContentTypes.`application/json`)
         }
       }
     )
