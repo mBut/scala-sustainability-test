@@ -42,3 +42,16 @@ class Http4sModule(val crossScalaVersion: String) extends CrossScalaModule {
     ivy"org.http4s::http4s-dsl:$Http4sVersion",
   )
 }
+
+object circe extends Cross[CirceModule](scala2, scala3)
+class CirceModule(val crossScalaVersion: String) extends CrossScalaModule {
+  def moduleDeps = Seq(util(crossScalaVersion))
+
+  val CirceVersion = "0.14.1"
+
+  def ivyDeps = Agg(
+    ivy"io.circe::circe-core:$CirceVersion",
+    ivy"io.circe::circe-generic:$CirceVersion",
+    ivy"io.circe::circe-parser:$CirceVersion",
+  )
+}

@@ -2,7 +2,7 @@ package sustainability
 package ziohttp
 
 import java.io.File
-import sustainability.util.ProgramArguments
+import sustainability.util.Util
 import zio._
 import zio.http._
 import zio.http.model.Method
@@ -15,7 +15,7 @@ object App extends ZIOAppDefault {
   }
 
   override val run = for {
-    extractedArgs <- getArgs.map(args => ProgramArguments.extractArguments(args.toArray))
+    extractedArgs <- getArgs.map(args => Util.extractArguments(args))
     _ <- Console.printLine("Server online at http://localhost:8080")
     server <- Server.serve(app(extractedArgs.workloadFilename).withDefaultErrorResponse).provide(Server.default)
   } yield server

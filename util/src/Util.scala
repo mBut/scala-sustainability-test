@@ -2,8 +2,10 @@ package sustainability
 package util
 
 import scala.util.{Try, Failure}
+import java.nio.file.{Paths, Files}
+import java.nio.charset.StandardCharsets
 
-object ProgramArguments {
+object Util {
 
   case class ExtractedArguments(workloadFilename: String)
 
@@ -16,5 +18,10 @@ object ProgramArguments {
 
     result.get
   }
+
+  // This method is used to flush JSON from the corresponding tests
+  // and ensure that lazy evalution (if any) doesn't affect the test results.
+  def writeToNull(value: String): Unit =
+    Files.write(Paths.get("/dev/null"), value.getBytes(StandardCharsets.UTF_8))
 
 }

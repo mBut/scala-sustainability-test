@@ -8,7 +8,7 @@ import org.http4s.server.Router
 import org.http4s._
 import org.http4s.dsl.io._
 import fs2.io.file.Path
-import sustainability.util.ProgramArguments
+import sustainability.util.Util
 
 object App extends IOApp {
   def service(workloadFilename: String) = HttpRoutes.of[IO] {
@@ -19,7 +19,7 @@ object App extends IOApp {
   }.orNotFound
 
   def run(args: List[String]): IO[ExitCode] = {
-    val extractedArgs = ProgramArguments.extractArguments(args)
+    val extractedArgs = Util.extractArguments(args)
 
     EmberServerBuilder
       .default[IO]

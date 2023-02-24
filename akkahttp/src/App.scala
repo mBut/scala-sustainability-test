@@ -9,12 +9,12 @@ import akka.http.scaladsl.server.Directives._
 import java.io.File
 import scala.io.{StdIn, Source}
 import scala.util.{Success, Failure}
-import sustainability.util.ProgramArguments
+import sustainability.util.Util
 
 object App {
 
   def main(args: Array[String]): Unit = {
-    val extractedArgs = ProgramArguments.extractArguments(args)
+    val extractedArgs = Util.extractArguments(args.toIndexedSeq)
 
     implicit val system = ActorSystem(Behaviors.empty, "test-system")
     implicit val executionContext = system.executionContext
