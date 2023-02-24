@@ -12,7 +12,8 @@
         buildInputs = (with pkgs; [
           linuxKernel.packages.linux_5_15.perf
           mill
-          wrk2
+          wrk
+          openjdk11
         ]);
       };
     };

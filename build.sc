@@ -30,3 +30,15 @@ class ZioHttpModule(val crossScalaVersion: String) extends CrossScalaModule {
     ivy"dev.zio::zio-http:$ZioHttpVersion",
   )
 }
+
+object http4s extends Cross[Http4sModule](scala2, scala3)
+class Http4sModule(val crossScalaVersion: String) extends CrossScalaModule {
+  def moduleDeps = Seq(util(crossScalaVersion))
+
+  val Http4sVersion = "0.23.6"
+
+  def ivyDeps = Agg(
+    ivy"org.http4s::http4s-ember-server:$Http4sVersion",
+    ivy"org.http4s::http4s-dsl:$Http4sVersion",
+  )
+}

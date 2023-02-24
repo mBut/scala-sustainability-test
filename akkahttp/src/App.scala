@@ -9,7 +9,7 @@ import akka.http.scaladsl.server.Directives._
 import java.io.File
 import scala.io.{StdIn, Source}
 import scala.util.{Success, Failure}
-import util.ProgramArguments
+import sustainability.util.ProgramArguments
 
 object App {
 
